@@ -1,8 +1,11 @@
 import React from 'react'
+import Line from './components/LineGraph'
 
 const App = () => {
   return (
-    <div>App</div>
+    <div >
+      <Line />
+    </div>
   )
 }
 
