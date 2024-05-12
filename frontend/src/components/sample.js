@@ -1,4 +1,4 @@
-export const data = {
+export const sampleData = {
   labels: ["Mon", "Tues", "Wed", "Thur", "Fri", "Sat", "Sun"],
   datasets: [
     {

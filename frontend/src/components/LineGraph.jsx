@@ -1,4 +1,5 @@
 import { Line } from "react-chartjs-2";
+
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -10,8 +11,6 @@ import {
   Legend,
 } from "chart.js";
 
-import {data} from "./sample.js"
-
 ChartJS.register(
   CategoryScale,
   LinearScale,
@@ -22,8 +21,11 @@ ChartJS.register(
   Legend
 );
 
-const LineGraph = () => {
+const LineGraph = ({data}) => {
     const options={}
+
+
+    console.log(data)
 
   return <Line options={options} data={data}/>;
 };
