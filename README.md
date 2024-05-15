@@ -1,6 +1,6 @@
 
 # Stock Price Prediction Model 
-A brief description of what this project does and who it's for
+Trained a Machine Learning Model on a time series data of stock prices. Displayed actual and predicted stock prices using ChartJs. 
 
 
 ## Tech Stack
