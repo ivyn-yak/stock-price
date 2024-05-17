@@ -53,12 +53,6 @@ const App = () => {
       .catch((error) => {
         console.log(error);
       });
-
-    return () => {
-      if (chartRef.current) {
-        chartRef.current.destroy();
-      }
-    };
   }
 
   useEffect(() => {
@@ -118,12 +112,16 @@ const App = () => {
         <button type='submit' onClick={handleSubmit} className="gap-2 border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:border-blue-500">Submit</button>
       </div>
 
-      {result && <LineGraph data={result} />}
+      {result && result.labels && <LineGraph data={result} ref={chartRef} />}
     </div>
   );
 };
 
 function formatData(jsonObj) {
+  if (!jsonObj || !jsonObj.y_pred || !jsonObj.y || !jsonObj.date) {
+    return { labels: [], datasets: [] };
+  }
+  
   const y_pred = jsonObj.y_pred;
   const y = jsonObj.y;
   const date = jsonObj.date;
