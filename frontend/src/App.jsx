@@ -3,11 +3,29 @@ import LineGraph from "./components/LineGraph";
 import axios from "axios";
 
 const App = () => {
+  const getDate100DaysAgo = (dateStr) => {
+    const date = new Date(dateStr);
+    if (isNaN(date)) {
+      throw new Error('Invalid date string');
+    }
+    const millisecondsPerDay = 24 * 60 * 60 * 1000;
+    const date100DaysAgo = new Date(date.getTime() - 150 * millisecondsPerDay);
+  
+    const formattedDate = date100DaysAgo.toISOString().split('T')[0];
+    
+    return formattedDate;
+  };
+
   const fetchData = async ({ stock, startDate, endDate }) => {
+    const newStartDate = getDate100DaysAgo(startDate)
+
+    console.log("here", startDate, newStartDate)
+
     try {
       const response = await axios.post(`http://localhost:8000`, {
         stock: stock,
         start: startDate,
+        past_100: newStartDate,
         end: endDate,
       });
 
