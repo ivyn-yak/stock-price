@@ -45,4 +45,13 @@ Start ML model locally
   uvicorn app:app --reload
 ```
 
+## Screenshots
+
+Initial screen
+
+![onload](/frontend/public/onload.png)
+
+Change inputs and click submit
+
+![onload](/frontend/public/onsubmit.png)
 
