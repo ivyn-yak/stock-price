@@ -6,20 +6,20 @@ const App = () => {
   const getDate100DaysAgo = (dateStr) => {
     const date = new Date(dateStr);
     if (isNaN(date)) {
-      throw new Error('Invalid date string');
+      throw new Error("Invalid date string");
     }
     const millisecondsPerDay = 24 * 60 * 60 * 1000;
     const date100DaysAgo = new Date(date.getTime() - 150 * millisecondsPerDay);
-  
-    const formattedDate = date100DaysAgo.toISOString().split('T')[0];
-    
+
+    const formattedDate = date100DaysAgo.toISOString().split("T")[0];
+
     return formattedDate;
   };
 
   const fetchData = async ({ stock, startDate, endDate }) => {
-    const newStartDate = getDate100DaysAgo(startDate)
+    const newStartDate = getDate100DaysAgo(startDate);
 
-    console.log("here", startDate, newStartDate)
+    console.log("here", startDate, newStartDate);
 
     try {
       const response = await axios.post(`http://localhost:8000`, {
@@ -39,9 +39,9 @@ const App = () => {
   const [result, setResult] = useState({});
   const chartRef = useRef(null);
 
-  const [stockInput, setStockInput] = useState('GOOG');
-  const [startInput, setStartInput] = useState('2019-01-01');
-  const [endInput, setEndInput] = useState('2024-01-01');
+  const [stockInput, setStockInput] = useState("GOOG");
+  const [startInput, setStartInput] = useState("2019-01-01");
+  const [endInput, setEndInput] = useState("2024-01-01");
 
   const handleStockChange = (event) => {
     setStockInput(event.target.value);
@@ -65,13 +65,12 @@ const App = () => {
           chartRef.current.destroy();
         }
 
-
-        console.log(startInput, endInput)
+        console.log(startInput, endInput);
       })
       .catch((error) => {
         console.log(error);
       });
-  }
+  };
 
   useEffect(() => {
     fetchData({ stock: stockInput, startDate: startInput, endDate: endInput })
@@ -79,8 +78,8 @@ const App = () => {
         const formattedData = formatData(data);
         setResult(formattedData);
 
-        console.log(formattedData)
-        console.log(result)
+        console.log(formattedData);
+        console.log(result);
 
         if (chartRef.current) {
           chartRef.current.destroy();
@@ -98,21 +97,20 @@ const App = () => {
   }, []);
 
   useEffect(() => {
-    console.log(result); 
+    console.log(result);
   }, [result]);
 
   return (
-    <div className="w-full p-10">
+    <div className="w-full py-6 px-10">
       <div className="flex mb-2">
-        <h1 className="text-3xl p-1 px-4">Stock</h1>
+        <h1 className="text-xl p-1 px-4">Stock</h1>
         <input
           type="text"
           className="border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:border-blue-500"
           value={stockInput}
           onChange={handleStockChange}
         />
-      </div>
-      <div className="flex mb-2">
+
         <h1 className="text-xl p-1 px-4">Start</h1>
         <input
           type="text"
@@ -127,7 +125,15 @@ const App = () => {
           value={endInput}
           onChange={handleEndChange}
         />
-        <button type='submit' onClick={handleSubmit} className="gap-2 border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:border-blue-500">Submit</button>
+        <div className=" px-4">
+          <button
+            type="submit"
+            onClick={handleSubmit}
+            className="gap-2 border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:border-blue-500"
+          >
+            Submit
+          </button>
+        </div>
       </div>
 
       {result && result.labels && <LineGraph data={result} ref={chartRef} />}
@@ -153,7 +159,7 @@ function formatData(jsonObj) {
     datasets: [
       {
         label: "Predicted",
-        data: y_pred.map(item => item[0]) || [],
+        data: y_pred.map((item) => item[0]) || [],
         borderColor: "rgb(75, 192, 192)",
       },
       {
