@@ -121,7 +121,7 @@ function formatData(jsonObj) {
   if (!jsonObj || !jsonObj.y_pred || !jsonObj.y || !jsonObj.date) {
     return { labels: [], datasets: [] };
   }
-  
+
   const y_pred = jsonObj.y_pred;
   const y = jsonObj.y;
   const date = jsonObj.date;
@@ -133,11 +133,11 @@ function formatData(jsonObj) {
   const data = {
     labels: date_values,
     datasets: [
-      // {
-      //   label: "Predicted",
-      //   data: y_pred.map(item => item[0]) || [],
-      //   borderColor: "rgb(75, 192, 192)",
-      // },
+      {
+        label: "Predicted",
+        data: y_pred.map(item => item[0]) || [],
+        borderColor: "rgb(75, 192, 192)",
+      },
       {
         label: "Actual",
         data: y,
